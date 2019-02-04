@@ -13,5 +13,24 @@ cd ycsb-0.15.0
 ```
 
 ## Workload Modification
-In default settings, latency measurements are presented as histograms. In order to get all the latency, workloads b and e in this repository are modified to present measurements as RAW datapoints in the following format:      
-                         "operation, timestamp of the measurement, latency in us"
+In default settings, latency measurements are presented as histograms. In order to get all the latency, workloads b and e in this repository are modified to present measurements as RAW datapoints in the following format:   
+
+"operation, timestamp of the measurement, latency in us"   
+                         
+All modifiable workload properties are listed [here](https://github.com/brianfrankcooper/YCSB/wiki/Core-Properties)
+
+## Running a Workload
+Workloads have two executable phases: the loading phase (which defines the data to be inserted) and the transactions phase (which defines the operations to be executed against the data set).
+
+For example, to load 15000000 records into the database you can execute this line: 
+
+```
+./bin/ycsb load mongodb -s -P workloads/workloadbcustom -p recordcount=15000000 > outputLoade.txt
+```
+to load the modified workload e you can replace 'workloadbcustom' with 'workloadecustom'
+
+to execute the workload you can use the following command:
+```
+./bin/ycsb run mongodb -s -P workloads/workloadbcustom -p operationcount=15000000
+```
+
